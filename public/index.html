@@ -1,43 +1,134 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- <link rel="stylesheet" href="style.css"> -->
-    <title>The Cheesy Shack</title>
-</head>
-<body>
-    <header>
-        <h1>Welcome to The Cheesy Shack</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section>
-            <h2>Section 1</h2>
-            <p>This is the content of section 1.</p>
-        </section>
-
-        <section>
-            <h2>Section 2</h2>
-            <p>This is the content of section 2.</p>
-        </section>
-    </main>
-
-    <aside>
-        <h2>Side Content</h2>
-        <p>Additional information goes here.</p>
-    </aside>
-
-    <footer>
-        <p>&copy; 2023 Your Website Name</p>
-    </footer>
-</body>
+<!DOCTYPE HTML>
+<html lang="en">
+   <head>
+       <title>The Cheesy Shack</title>
+       <meta charset="utf-8"/>
+   </head>
+   <body>
+        <main> 
+            <h1>Welcome to The Cheesy Shack</h1>
+            <section>
+                <h2>Fantastic Burgers and where to find them</h2>
+                <div style="display: inline-block">
+                    <h3>The Whomping Whopper</h3>
+                    <img src="/img/whomping_willow.jpg" style="height: 200px" alt="The Whomping Willow">
+                    <ul>
+                        <li>Chili sauce</li>
+                        <li>Jalapeño</li>
+                        <li>Lettuce</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+                <div style="display: inline-block">
+                    <h3>The QuidCheese</h3>
+                    <img src="/img/quidcheese.jpg" style="height: 200px" alt="The QuidCheese">
+                    <ul>
+                        <li>Cheddar</li>
+                        <li>Gouda</li>
+                        <li>Dressing</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+                <div style="display: inline-block">
+                    <h3>The Veggietaserum</h3>
+                    <img src="/img/veggietaserum.jpg" style="height: 200px" alt="The Veggietaserum">
+                    <ul>
+                        <li>Grilloumi</li>
+                        <li>Mayonnaise</li>
+                        <li>Tomato</li>
+                        <li>Lettuce</li>
+                    </ul>
+                </div> 
+                <br /> 
+                <div style="display: inline-block">
+                    <h3>The Hogsmeat</h3>
+                    <img src="/img/hogsmeat.jpg" style="width: 300px" alt="The Marauders Smash">
+                    <ul>
+                        <li>Cheddar</li>
+                        <li>Tomato sauce</li>
+                        <li>Mayonnaise</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+                <div style="display: inline-block">
+                    <h3>The Marauders Smash</h3>
+                    <img src="/img/marauders.jpg" style="width: 300px" alt="The Marauders Smash">
+                    <ul>
+                        <li>Cheddar</li>
+                        <li>Tomato sauce</li>
+                        <li>Mayonnaise</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+                <div style="display: inline-block">
+                    <h3>The Buckbeef</h3>
+                    <img src="/img/buckbeef.jpg" style="width: 290px" alt="The Buckbeef">
+                    <ul>
+                        <li>Cheddar</li>
+                        <li>Tomato sauce</li>
+                        <li>Mayonnaise</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <form>
+                    <h2>Muggle information</h2>
+                    <p>
+                        <label for="name">Full name</label><br>
+                        <input type="text" id="name" name="n" required="required" placeholder="First- and lastname">
+                    </p>
+                    <p>
+                        <label for="email">E-mail</label><br>
+                        <input type="email" id="email" name="em" placeholder="E-mail address">
+                    </p>
+                    <p>
+                        <label for="nr">Phone number</label><br>
+                        <input type="tel" id="nr" name="nr" placeholder="Phone number">
+                    </p>
+                    <p>
+                        <label for="street">Street</label><br>
+                        <input type="text" id="street" name="st" required="required" placeholder="Street name">
+                    </p>
+                    <p>
+                        <label for="housenr">House</label><br>
+                        <input type="number" id="housenr" name="hnr" required="required" placeholder="House number">
+                    </p>
+                    <p>
+                        <input type="radio" id="female" name="gender">
+                        <label for="female">Female</label>
+                        <input type="radio" id="male" name="gender">
+                        <label for="male">Male</label>
+                        <input type="radio" id="other" name="gender">
+                        <label for="other">Other</label>
+                    </p>
+                    <h3>Payment choices</h3>
+                    <p>
+                        <label for="currency">Currency</label><be>
+                        <select id="currency" name="curr">
+                            <option selected="selected">Galleons</option>
+                            <option>Sickles</option>
+                            <option>Knots</option>
+                            <option>Muggle money</option>
+                        </select>
+                    </p>
+                    <h4>Receipt via:</h4>
+                    <p>
+                        <input type="checkbox" id="owl" name="r">
+                        <label for="owl">Owl</label>
+                        <input type="checkbox" id="e_mail" name="r">
+                        <label for="e_mail">E-mail</label>
+                        <input type="checkbox" id="sms" name="r">
+                        <label for="sms">SMS</label>
+                    </p>
+                </form>
+            </section>
+            <button type="submit">
+                Place my order
+                <img src="/img/wand.png" style="height: 30px">
+            </button>
+        </main>
+        <hr>
+        <footer>&copy; 2023 The Cheesy Shack</footer>
+   </body>
 </html>
