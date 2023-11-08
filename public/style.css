@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Noto+Serif&family=Roboto+Condensed&family=Roboto:wght@100&display=swap');
+
+
+body {
+    font-family: "Noto Serif", serif;
+    font-size: 1em;
+    margin-left: 4em;
+    margin-right: 4em;
+    background-color: cadetblue;
+}
+
+
+#burger, #customer-information {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#head {
+    width: 100%
+
+}
+/*Styling of burger squares*/
+#burger {
+    text-align: center;
+    width: 20rem;
+    height: 30em;
+    border: 10px double grey;
+    background-color: white;
+
+}
+
+#burger h3, #burger img {
+    text-align: center;
+}
+
+#burger ul {
+    text-align: left;
+    margin-left: 3.5em;
+    margin-right: 3.5em;
+}
+
+#allergies {
+    color: darkred;
+    text-transform: uppercase;
+    padding-top: 1em;
+}
+
+/*Styling of customer information*/
+
+#customer-information {
+    padding-left: 3em;
+    width: 33.5em;
+    background-color: lightgray;
+    border: 5px solid dimgray;
+}
+
+
+
+button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 2em;
+    border: 2px solid grey;
+
+
+}
+button:hover {
+    background-color: lightsalmon;
+ }
