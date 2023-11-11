@@ -1,146 +1,17 @@
-<!DOCTYPE HTML>
-<html lang="en">
-   <head>
-       <title>The Cheesy Shack</title>
-       <meta charset="utf-8"/>
-       <link rel="stylesheet" type="text/css" href="/CSS/style.css">
-   </head>
-   <body>
-        <main> 
-            <div id="head">
-                <img id="head-img" src="https://static.vecteezy.com/system/resources/previews/007/773/416/large_2x/dramatic-dark-sky-and-clouds-cloudy-sky-background-black-sky-before-thunder-storm-and-rain-background-for-death-sad-grieving-or-depression-free-photo.jpg">
-                <h1>Welcome to The Cheesy Shack</h1>
-            </div>
-            <section id="burger-selection">
-                <h2 id="subtitle">Fantastic Burgers and where to find them</h2>
-                <div class="burger-layout">
-                    <div class="burger burger_1">
-                        <h3 class="burger-name">The Whomping Whopper</h3>
-                        <img src="/img/whomping_whopper.jpg" style="width: 300px" alt="The Whomping Willow">
-                        <ul class="burger-info">
-                            <li>Chili sauce, Jalapeño, Lettuce, Onion</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div>
-                    <div class="burger burger_2">
-                        <h3 class="burger-name">The QuidCheese</h3>
-                        <img src="/img/quidcheese.jpg" style="width: 300px" alt="The QuidCheese">
-                        <ul class="burger-info">
-                            <li>Cheddar, Gouda, Dressing, Onion</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div>
-                    <div class="burger burger_3">
-                        <h3 class="burger-name">The Veggietaserum</h3>
-                        <img src="/img/veggietaserum.jpg" style="width: 300px" alt="The Veggietaserum">
-                        <ul class="burger-info">
-                            <li>Grilloumi, Mayonnaise, Tomato, Lettuce</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div> 
-                    <div class="burger burger_4">
-                        <h3 class="burger-name">The Hogsmeat</h3>
-                        <img src="/img/hogsmeat.jpg" style="width: 300px" alt="The Marauders Smash">
-                        <ul class="burger-info">
-                            <li>Cheddar, Tomato sauce, Mayonnaise, Onion</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div>
-                    <div class="burger burger_5">
-                        <h3 class="burger-name">The Marauders Smash</h3>
-                        <img src="/img/marauders.jpg" style="width: 300px" alt="The Marauders Smash">
-                        <ul class="burger-info">
-                            <li>Cheddar, Tomato sauce, Mayonnaise, Onion</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div>
-                    <div class="burger burger_6">
-                        <h3 class="burger-name">The Buckbeef</h3>
-                        <img src="/img/buckbeef.jpg" style="width: 300px" alt="The Buckbeef">
-                        <ul class="burger-info">
-                            <li>Cheddar, Tomato sauce, Mayonnaise, Onion</li>
-                            <section id="allergies">
-                                <li>Contains gluten</li>
-                                <li>Contains lactose</li>
-                            </section>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section id="customer-information">
-                <form>
-                    <h2 id="muggle-title">Muggle information</h2>
-                    <div id="muggle-info">
-                        <p>
-                            <label for="name">Full name</label><br>
-                            <input type="text" id="name" name="n" required="required" placeholder="First- and lastname">
-                        </p>
-                        <p>
-                            <label for="email">E-mail</label><br>
-                            <input type="email" id="email" name="em" placeholder="E-mail address">
-                        </p>
-                        <p>
-                            <label for="nr">Phone number</label><br>
-                            <input type="tel" id="nr" name="nr" placeholder="Phone number">
-                        </p>
-                        <p>
-                            <label for="street">Street</label><br>
-                            <input type="text" id="street" name="st" required="required" placeholder="Street name">
-                        </p>
-                        <p>
-                            <label for="housenr">House</label><br>
-                            <input type="number" id="housenr" name="hnr" required="required" placeholder="House number">
-                        </p>
-                        <p>
-                            <input type="radio" id="female" name="gender">
-                            <label for="female">Witch</label>
-                            <input type="radio" id="male" name="gender">
-                            <label for="male">Wizard</label>
-                            <input type="radio" id="other" name="gender">
-                            <label for="other">Muggle</label>
-                        </p>
-                        <h3>Payment choices</h3>
-                        <p>
-                            <label for="currency">Currency</label><be>
-                            <select id="currency" name="curr">
-                                <option selected="selected">Galleons</option>
-                                <option>Sickles</option>
-                                <option>Knots</option>
-                                <option>Muggle money</option>
-                            </select>
-                        </p>
-                        <h4>Receipt via:</h4>
-                        <p>
-                            <input type="checkbox" id="owl" name="r">
-                            <label for="owl">Owl</label>
-                            <input type="checkbox" id="e_mail" name="r">
-                            <label for="e_mail">E-mail</label>
-                            <input type="checkbox" id="sms" name="r">
-                            <label for="sms">SMS</label>
-                        </p>
-                    </div>
-                </form>
-            </section>
-            <button type="submit">
-                Place my order
-                <img src="/img/wand.png" style="height: 30px">
-            </button>
-        </main>
-        <footer>&copy; 2023 The Cheesy Shack</footer>
-   </body>
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>

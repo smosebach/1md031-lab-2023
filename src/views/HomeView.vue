@@ -18,6 +18,21 @@ import io from 'socket.io-client'
 
 const socket = io();
 
+let burgers = [{name:"The Whomping Whopper", img:"../../public/img/whomping_whopper.jpg", ingredients: ["Chili sauce", "Jalapeño", "Lettuce", "Onion"], lactose: true, gluten: true },
+               {name:"The QuidCheese", img:"../../public/img/quidcheese.jpg", ingredients:["Cheddar", "Gouda", "Dressing", "Onion"], lactose: true, gluten: true},
+               {name:"The Veggietaserum", img:"../../public/img/veggietaserum.jpg", ingredients:["Grilloumi", "Mayonnaise", "Tomato", "Lettuce"], lactose: true, gluten: true},
+               {name:"The Hogsmeat", img:"../../public/img/hogsmeat.jpg", ingredients:["Cheddar", "Bacon", "Mayonnaise", "Onion"], lactose: true, gluten: true},
+               {name:"The Marauders Smash", img:"../../public/img/marauders.jpg", ingredients:["Cheddar", "Dressing", "Lettuce", "Onion"], lactose: true, gluten: true},
+               {name:"The Buckbeef", img:"../../public/img/buckbeef.jpg", ingredients:["Cheddar", "Dressing", "Onion"], lactose: true, gluten: true}]
+
+function MenuItem (name, img, ingredients, lactose, gluten) {
+  this.name = name;
+  this.img = img;
+  this.ingredients = ingredients;
+  this.lactose = lactose;
+  this.gluten = gluten;
+}
+
 export default {
   name: 'HomeView',
   components: {
@@ -25,10 +40,7 @@ export default {
   },
   data: function () {
     return {
-      burgers: [ {name: "small burger", kCal: 250},
-                 {name: "standard burger", kCal: 450},
-                 {name: "large burger", kCal: 850}
-               ]
+      burgers: burgers
     }
   },
   methods: {
