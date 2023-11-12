@@ -1,0 +1,44 @@
+[
+    {
+      "name": "The Whomping Whopper",
+      "ingredients": "Chili sauce, Jalapeño, Lettuce, Onion",
+      "lactose": true,
+      "gluten": true,
+      "img": "/img/whomping_whopper.jpg"
+    },
+    {
+        "name": "The QuidCheese",
+        "ingredients": "Cheddar, Gouda, Dressing, Onion",
+        "lactose": true,
+        "gluten": true,
+        "img": "/img/quidcheese.jpg"
+    },
+    {
+        "name": "The Veggietaserum",
+        "ingredients": "Grilloumi, Mayonnaise, Tomato, Lettuce",
+        "lactose": true,
+        "gluten": true,
+        "img": "/img/veggietaserum.jpg"
+    },
+    {
+        "name": "The Hogsmeat",
+        "ingredients": "Cheddar, Bacon, Mayonnaise, Onion",
+        "lactose": true,
+        "gluten": true,
+        "img": "/img/hogsmeat.jpg"
+    },
+    {
+        "name": "The Marauders Smash",
+        "ingredients": "Cheddar, Dressing, Lettuce, Onion",
+        "lactose": true,
+        "gluten": true,
+        "img": "/img/marauders.jpg"
+    },
+    {
+        "name": "The Buckbeef",
+        "ingredients": "Cheddar, Dressing, Onion",
+        "lactose": true,
+        "gluten": true,
+        "img": "/img/buckbeef.jpg"
+    }
+  ]
