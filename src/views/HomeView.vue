@@ -15,38 +15,35 @@
                     <h2 id="muggle-title">Muggle information</h2>
                     <div id="muggle-info">
                         <p>
-                            <label for="name">Full name</label><br>
-                            <input type="text" id="name" name="n" required="required" placeholder="First- and lastname">
+                            Full name<br>
+                            <input v-model="fullName" type="text" placeholder="First- and lastname"> 
                         </p>
                         <p>
-                            <label for="email">E-mail</label><br>
-                            <input type="email" id="email" name="em" placeholder="E-mail address">
+                            E-mail<br>
+                            <input v-model="emailAddress" type="email" placeholder="E-mail address">
                         </p>
                         <p>
-                            <label for="nr">Phone number</label><br>
-                            <input type="tel" id="nr" name="nr" placeholder="Phone number">
+                            Phone number<br>
+                            <input v-model="phoneNumber" type="tel" placeholder="Phone number">
                         </p>
                         <p>
-                            <label for="street">Street</label><br>
-                            <input type="text" id="street" name="st" required="required" placeholder="Street name">
+                            Address<br>
+                            <input v-model="address" type="text" required="required" placeholder="Street and number">
                         </p>
                         <p>
-                            <label for="housenr">House</label><br>
-                            <input type="number" id="housenr" name="hnr" required="required" placeholder="House number">
-                        </p>
-                        <p>
-                            <input type="radio" id="female" name="gender">
-                            <label for="female">Witch</label>
-                            <input type="radio" id="male" name="gender">
-                            <label for="male">Wizard</label>
-                            <input type="radio" id="other" name="gender">
-                            <label for="other">Muggle</label>
+                            <input v-model="gender" type="radio" required="required" id="witch" value="witch">
+                            <label for="witch">Witch</label>
+                            <input v-model="gender" type="radio" id="wizard" value="wizard">
+                            <label for="wizard">Wizard</label>
+                            <input v-model="gender" type="radio" id="muggle" value="muggle">
+                            <label for="muggle">Muggle</label>
                         </p>
                         <h3>Payment choices</h3>
                         <p>
                             <label for="currency">Currency</label>
-                            <select id="currency" name="curr">
-                                <option selected="selected">Galleons</option>
+                            <select v-model="currency" id="currency" required="required">
+                                <option disabled value="">Please select one</option>
+                                <option>Galleons</option>
                                 <option>Sickles</option>
                                 <option>Knots</option>
                                 <option>Muggle money</option>
@@ -54,17 +51,17 @@
                         </p>
                         <h4>Receipt via:</h4>
                         <p>
-                            <input type="checkbox" id="owl" name="r">
+                            <input v-model="reciept" type="checkbox" value="owl" id="owl">
                             <label for="owl">Owl</label>
-                            <input type="checkbox" id="e_mail" name="r">
+                            <input v-model="reciept" type="checkbox" value="email" id="e_mail">
                             <label for="e_mail">E-mail</label>
-                            <input type="checkbox" id="sms" name="r">
+                            <input v-model="reciept" type="checkbox" value="sms" id="sms">
                             <label for="sms">SMS</label>
                         </p>
                     </div>
                 </form>
             </section>
-            <button type="submit">
+            <button v-on:click="printInConsole()" type="submit" id="order-button">
                 Place my order
                 <img src="/img/wand.png" style="height: 30px">
             </button>
@@ -73,11 +70,22 @@
 </template>
 
 <script>
+
 import Burger from '../components/OneBurger.vue'
 import menu from '../assets/menu.json'
 import io from 'socket.io-client'
+import { ref } from 'vue'
 
 const socket = io();
+const fullName = ref("");
+const emailAddress = ref("");
+const phoneNumber = ref("");
+const address = ref("");
+const gender = ref("witch");
+const currency = ref("");
+const reciept = ref([]);
+
+
 
 function MenuItem (name, img, ingredients, lactose, gluten) {
   this.name = name;
@@ -94,10 +102,20 @@ export default {
   },
   data: function () {
     return {
-      burgers: menu
+      burgers: menu,
+      fullName: fullName,
+      emailAddress: emailAddress,
+      phoneNumber: phoneNumber,
+      address: address,
+      gender: gender,
+      currency: currency,
+      reciept: reciept
     }
   },
   methods: {
+    printInConsole: function() {
+        console.log(fullName, emailAddress, phoneNumber, address, gender, currency, reciept);
+    },
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
     },
@@ -223,7 +241,7 @@ h1 {
 #muggle-info {
     padding: 0em 1em 0em 3em;
 }
-button {
+#order-button {
     margin-top: 2em;
     margin-bottom: 2em;
     margin-left: 8em;
@@ -234,7 +252,7 @@ button {
     font-family: "Harry Potter", serif;
 }
 
-button:hover {
+#order-button:hover {
     background-color: gold;
  }
 
