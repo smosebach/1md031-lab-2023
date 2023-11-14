@@ -10,7 +10,7 @@
         </section>
     </ul>
     <div id="button-container">
-      <button class="amount-button">-</button>
+      <button v-on:click="decreaseAmount" class="amount-button">-</button>
       {{amountOrdered}}
       <button v-on:click="increaseAmount" class="amount-button">+</button>
     </div>
@@ -24,6 +24,7 @@
     props: {
       burger: Object
     },
+    emits: ['addBurger', 'removeBurger'],
 
   data: function () {
     return {
@@ -33,7 +34,12 @@
 
   methods: {
     increaseAmount: function () {
-      amountOrdered += 1;
+      this.amountOrdered += 1;
+      this.$emit("addBurger", {name: this.burger.name, amount: this.amountOrdered});
+    },
+    decreaseAmount: function () {
+      this.amountOrdered -= 1;
+      this.$emit("removeBurger", {name: this.burger.name, amount: this.amountOrdered});
     }
   }
   }
@@ -51,6 +57,7 @@
 
   .burger-name {
     font-size: 1.5em;
+    margin-bottom: 0.5em;
     }
 
   #burger h3, #burger img {
