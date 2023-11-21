@@ -1,16 +1,24 @@
 <template>
-    <div id="orders">
-      <div id="orderList">
-        <div v-for="(order, key) in orders" v-bind:key="'order'+key">
-          #{{ key }}: {{ order.orderItems.join(", ") }}
-        </div>
+  <div id="orders">
+    <div id="orderList">
+      <div v-for="(order, key) in orders" v-bind:key="'order'+key">
+        <p id = "orderInfo">
+          #{{ key }}: {{ formattingOrder(order.orderItems) }}
+        </p>
+        <p id="customerInfo">
+          {{ formattingCustInfo(order.customerInfo) }}
+        </p>
+        <hr>
+      </div>
         <button v-on:click="clearQueue">Clear Queue</button>
       </div>
-      <div id="dots" v-bind:style="{ background: 'url(' + require('../../public/img/polacks.jpg')+ ')' }">
-          <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}" v-bind:key="'dots' + key">
-            {{ key }}
-          </div>
-      </div>
+      <div class="wrapper">
+        <div id="dots" v-bind:style="{ background: 'url(' + require('../../public/img/polacks.jpg')+ ')' }">
+            <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}" v-bind:key="'dots' + key">
+              {{ key }}
+            </div>
+        </div>
+    </div>
     </div>
   </template>
   <script>
@@ -27,10 +35,31 @@
     created: function () {
       socket.on('currentQueue', data =>
         this.orders = data.orders);
+        console.log(this.orders)
     },
     methods: {
       clearQueue: function () {
         socket.emit('clearQueue');
+      },
+      formattingOrder: function (items) {
+        let keysArr = Object.keys(items);
+        let valArr = Object.values(items);
+        let res = ""
+        for (let i in keysArr) {
+          res += keysArr[i] + ': ' + valArr[i] + ', ';
+        }
+        return res.slice(0,-2)
+      },
+      formattingCustInfo: function (info) {
+        let valArr = Object.values(info);
+        let res = ""
+        res += valArr[0] + ' ('
+        for (let i = 1; i < valArr.length-1; i += 1) {
+          res += valArr[i] + ', ';
+        }
+        res = res.slice(0,-2);
+        res += '), ' + 'Reciept via: ' + valArr.slice(-1);
+        return res
       }
     }
   }
@@ -63,6 +92,18 @@
     width:20px;
     height:20px;
     text-align: center;
+  }
+
+  #orderInfo {
+    margin:0em;
+    padding:0em;
+    font-size: 1.1em;
+  }
+  
+  #customerInfo {
+    margin: 0em;
+    padding: 0em;
+    font-family: italic;
   }
   </style>
   

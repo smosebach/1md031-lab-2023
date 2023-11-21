@@ -1,12 +1,97 @@
+<template>
+    <main> 
+        <div id="head">
+            <img id="head-img" src="https://static.vecteezy.com/system/resources/previews/007/773/416/large_2x/dramatic-dark-sky-and-clouds-cloudy-sky-background-black-sky-before-thunder-storm-and-rain-background-for-death-sad-grieving-or-depression-free-photo.jpg">
+            <h1>Welcome to The Cheesy Shack</h1>
+        </div>
+        <section id="burger-selection">
+            <h2 id="subtitle">Fantastic Burgers and where to find them</h2>
+            <div id="burger-container">
+                <Burger 
+                    v-for="burger in burgers"
+                    v-bind:burger="burger" 
+                    v-bind:key="burger.name"
+                    v-on:addBurger="recieveAddedBurger($event)"
+                    v-on:removeBurger="recieveRemovedBurger($event)">
+                </Burger>
+            </div>
+        </section>
+        <section id="customer-information">
+            <div id="info-1">
+                <form>
+                    <h2 class="info-title">Muggle information</h2>
+                    <div id="muggle-info">
+                        <p>
+                            Full name<br>
+                            <input v-model="fullName" type="text" placeholder="First- and lastname"> 
+                        </p>
+                        <p>
+                            E-mail<br>
+                            <input v-model="emailAddress" type="email" placeholder="E-mail address">
+                        </p>
+                        <p>
+                            Phone number<br>
+                            <input v-model="phoneNumber" type="tel" placeholder="Phone number">
+                        </p>
+                        <p>
+                            <input v-model="gender" type="radio" id="witch" value="witch">
+                            <label for="witch">Witch</label>
+                            <input v-model="gender" type="radio" id="wizard" value="wizard">
+                            <label for="wizard">Wizard</label>
+                            <input v-model="gender" type="radio" id="muggle" value="muggle">
+                            <label for="muggle">Muggle</label>
+                        </p>
+                        <h3>Payment choices</h3>
+                        <p>
+                            <label for="currency">Currency </label>
+                            <select v-model="currency" id="currency" required="required">
+                                <option disabled value="">Please select one</option>
+                                <option>Galleons</option>
+                                <option>Sickles</option>
+                                <option>Knots</option>
+                                <option>Muggle money</option>
+                            </select>
+                        </p>
+                        <h4>Receipt via:</h4>
+                        <p>
+                            <input v-model="reciept" type="checkbox" value="owl" id="owl">
+                            <label for="owl">Owl</label>
+                            <input v-model="reciept" type="checkbox" value="email" id="e_mail">
+                            <label for="e_mail">E-mail</label>
+                            <input v-model="reciept" type="checkbox" value="sms" id="sms">
+                            <label for="sms">SMS</label>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div id="info-2">
+                <h2 class="info-title">Location of delivery</h2>
+                <h3 style="margin-left: 2em;">Click on the map where the order shall be delivered</h3>
+                <div class="map-container">
+                    <div id="location" v-on:click="setLocation">
+                        <p id="dot" v-bind:style="{ left: this.location.x + 'px', 
+                                                    top: this.location.y + 'px' }">
+                        </p>
+                        <img id="map" src="/img/polacks.jpg">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <button v-on:click="placeOrder()" type="submit" id="order-button">
+            Place my order
+            <img src="/img/wand.png" style="height: 30px">
+        </button>
+    </main>
+    <footer>&copy; 2023 The Cheesy Shack</footer>
+</template>
+
+
 <script>
 import Burger from '../components/OneBurger.vue'
 import menu from '../assets/menu.json'
 import io from 'socket.io-client'
 
 const socket = io();
-
-
-
 
 function MenuItem (name, img, ingredients, lactose, gluten) {
   this.name = name;
@@ -18,7 +103,6 @@ function MenuItem (name, img, ingredients, lactose, gluten) {
 
 export default {
   name: 'HomeView',
-  
   components: {
     Burger
   },
@@ -35,6 +119,7 @@ export default {
         location: { x: 0, y: 0}
     }
   },
+
   methods: {
     recieveAddedBurger(order) {
         this.BurgerOrders[order.name] = order.amount;
@@ -47,115 +132,34 @@ export default {
             this.BurgerOrders[order.name] = order.amount;
         }
         console.log(this.BurgerOrders)
-
     },
-    printInConsole: function() {
-        console.log(this.fullName, this.emailAddress, this.phoneNumber, this.gender, this.currency, this.reciept);
+    setLocation: function (event) {
+        var offset = {x: event.currentTarget.getBoundingClientRect().left,
+                    y: event.currentTarget.getBoundingClientRect().top};
+        this.location = { x: event.clientX - 10 - offset.x, y: event.clientY - 10 - offset.y }
+    },
+    placeOrder: function() {
+        socket.emit("addOrder", { orderId: this.getOrderNumber(),
+                                details: { x: this.location['x'],
+                                           y: this.location['y']},
+                                orderItems: this.BurgerOrders,
+                                customerInfo: { name: this.fullName,
+                                                email: this.emailAddress,
+                                                tel: this.phoneNumber,
+                                                gender: this.gender,
+                                                curracy: this.currency,
+                                                reciept: this.reciept}   
+                              }
+                 );
+        alert('Thank you for your order!')
     },
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
-    },
-    addOrder: function (event) {
-      var offset = {x: event.currentTarget.getBoundingClientRect().left,
-                    y: event.currentTarget.getBoundingClientRect().top};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(),
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
     }
   }
 }
 </script>
 
-<template>
-    <main> 
-      <div id="head">
-        <img id="head-img" src="https://static.vecteezy.com/system/resources/previews/007/773/416/large_2x/dramatic-dark-sky-and-clouds-cloudy-sky-background-black-sky-before-thunder-storm-and-rain-background-for-death-sad-grieving-or-depression-free-photo.jpg">
-        <h1>Welcome to The Cheesy Shack</h1>
-      </div>
-      <section id="burger-selection">
-        <h2 id="subtitle">Fantastic Burgers and where to find them</h2>
-        <div id="burger-container">
-          <Burger 
-              v-for="burger in burgers"
-              v-bind:burger="burger" 
-              v-bind:key="burger.name"
-              v-on:addBurger="recieveAddedBurger($event)"
-              v-on:removeBurger="recieveRemovedBurger($event)">
-          </Burger>
-        </div>
-      </section>
-        <section id="customer-information">
-            <div id="info-1">
-                    <form>
-                      <h2 class="info-title">Muggle information</h2>
-                      <div id="muggle-info">
-                          <p>
-                              Full name<br>
-                              <input v-model="fullName" type="text" placeholder="First- and lastname"> 
-                          </p>
-                          <p>
-                              E-mail<br>
-                              <input v-model="emailAddress" type="email" placeholder="E-mail address">
-                          </p>
-                          <p>
-                              Phone number<br>
-                              <input v-model="phoneNumber" type="tel" placeholder="Phone number">
-                          </p>
-                          <p>
-                              <input v-model="gender" type="radio" required="required" id="witch" value="witch">
-                              <label for="witch">Witch</label>
-                              <input v-model="gender" type="radio" id="wizard" value="wizard">
-                              <label for="wizard">Wizard</label>
-                              <input v-model="gender" type="radio" id="muggle" value="muggle">
-                              <label for="muggle">Muggle</label>
-                          </p>
-                          <h3>Payment choices</h3>
-                          <p>
-                              <label for="currency">Currency </label>
-                              <select v-model="currency" id="currency" required="required">
-                                  <option disabled value="">Please select one</option>
-                                  <option>Galleons</option>
-                                  <option>Sickles</option>
-                                  <option>Knots</option>
-                                  <option>Muggle money</option>
-                              </select>
-                          </p>
-                          <h4>Receipt via:</h4>
-                          <p>
-                              <input v-model="reciept" type="checkbox" value="owl" id="owl">
-                              <label for="owl">Owl</label>
-                              <input v-model="reciept" type="checkbox" value="email" id="e_mail">
-                              <label for="e_mail">E-mail</label>
-                              <input v-model="reciept" type="checkbox" value="sms" id="sms">
-                              <label for="sms">SMS</label>
-                          </p>
-                      </div>
-                  </form>
-
-                  </div>
-                  <div id="info-2">
-                    <h2 class="info-title">Location of delivery</h2>
-                    <h3 style="margin-left: 2em;">Click on the map where the order shall be delivered</h3>
-                    <div id="location" v-on:click="addOrder" v-bind:style="{ left: this.location.x + 'px', 
-                      top: this.location.y + 'px' }">
-                      <p id="dot">
-                        X
-                      </p>
-                        <img id="map" src="/img/polacks.jpg">
-                    </div>
-                  </div>
-              </section>
-              <button v-on:click="printInConsole()" type="submit" id="order-button">
-                  Place my order
-                  <img src="/img/wand.png" style="height: 30px">
-              </button>
-          </main>
-          <footer>&copy; 2023 The Cheesy Shack</footer>
-  </template>
-  
 
 <style>
 @import url('https://fonts.cdnfonts.com/css/harry-potter');
@@ -179,7 +183,6 @@ body {
 #head {
     position: relative;
 }
-
 h1 {
     position: absolute;
     top: 40%;
@@ -190,7 +193,6 @@ h1 {
     color: goldenrod;
     font-family: "Harry Potter", serif;
 }
-
 #head-img {
     display: block;
     opacity: 0.7;
@@ -198,7 +200,6 @@ h1 {
     width: 100%;
     height: 15em;
 }
-
 #subtitle {
     background-color: rgb(27, 46, 47);
     border-top: 0.4em solid black;
@@ -216,19 +217,17 @@ h1 {
     margin: 1em 4em 2em 4em;
 }
 
-/*Styling of customer information*/
+/*Layout of customer information*/
 #customer-information {
     display: grid;
     grid-template-columns: 21em 43.2em;
     grid-template-rows: 34.5em;
     grid-gap: 1em;
 }
-
 #info-1 {
     grid-row: 1;
     grid-column: 1;
 }
-
 #info-2 {
     grid-row: 1;
     grid-column: 2;
@@ -237,8 +236,10 @@ h1 {
     background-color:  rgb(184, 205, 198);
 }
 
+/*Styling of customer information*/
 form {
     width: 20.7em;
+    height:33.9em;
     background-color:  rgb(184, 205, 198);
     border: 5px solid black;
 }
@@ -253,9 +254,12 @@ form {
     padding: 0em 1em 0em 3em;
 }
 
-#location {
+/*Styling of the map and dot*/
+.map-container {
     overflow: scroll;
     height: 24.5em;
+}
+#location {
     position: relative;
 }
 #map {
@@ -265,7 +269,13 @@ form {
     position: absolute;
     padding: 0em;
     margin: 0em;
+    background-color: brown;
+    border:2px black solid;
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
 }
+
 /*Styling of order button*/
 #order-button {
     margin-top: 2em;
@@ -277,7 +287,6 @@ form {
     font-size: 1em;
     font-family: "Harry Potter", serif;
 }
-
 #order-button:hover {
     background-color: gold;
  }
